@@ -41,7 +41,7 @@ export const Sidebar = () => {
                 {/* 選單內容區 */}
                 <Stack gap="2" overflowY="auto" flex="1" px="2">
                     <NavGroup icon={FaUserTie} title="客戶管理" active>
-                        <NavItem title="客戶設定" path='/customer' active />
+                        <NavItem title="客戶設定" path='/customers' active />
                         <NavItem title="客戶設定" path='/' />
                     </NavGroup>
                 </Stack>
