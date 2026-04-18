@@ -1,30 +1,34 @@
 import React from 'react';
-import { Box, Button, Card, Flex, Heading, HStack, Input, SimpleGrid, Stack, Table, Text } from "@chakra-ui/react";
+import { Box, Button, Card, Flex, Heading, HStack, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
 import { MdAdd, MdClear } from "react-icons/md";
-import { FaEdit, FaSearch, FaTrash, FaUserTie } from "react-icons/fa";
+import { FaUserTie } from "react-icons/fa";
+import CustomTable from "@/components/data/CustomTable.jsx";
 
 export const CustomerList = () => {
-    const data = [
-        {
-            id: 1,
-            name: '客戶1',
-            taxId: '12345678',
-            owner: '業務窗口1',
-            phone: '0912345678',
-            contact: '聯絡人1',
-            email: 'abc@gmail.com'
-        },
-        {
-            id: 2,
-            name: '客戶2',
-            taxId: '87654321',
-            owner: '業務窗口1',
-            phone: '0987654321',
-            contact: '聯絡人2',
-            email: '123@gmail.com'
-        }
+    const columns = [
+        { key: 'name', title: '客戶名稱' },
+        { key: 'taxId', title: '客戶統編' },
+        { key: 'owner', title: '業務窗口' },
+        { key: 'phone', title: '電話' },
+        { key: 'contact', title: '聯絡人' },
+        { key: 'email', title: 'email' },
+        { key: 'actions', title: '' },
     ];
+
+    const data = [];
+
+    for (let i = 1; i < 50; i++) {
+        data.push({
+            id: i,
+            name: `客戶_${i}`,
+            taxId: `客戶統編_${i}`,
+            owner: `業務窗口_${i}`,
+            phone: `電話_${i}`,
+            contact: `聯絡人_${i}`,
+            email: `email_${i}`
+        });
+    }
 
     return (
         <Box w='100%'>
@@ -107,66 +111,7 @@ export const CustomerList = () => {
                         </Flex>
                     </Card.Header>
                     <Card.Body>
-                        <Table.Root>
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.ColumnHeader color="gray.700" fontWeight="bold">客戶名稱</Table.ColumnHeader>
-                                    <Table.ColumnHeader color="gray.700" fontWeight="bold">客戶統編</Table.ColumnHeader>
-                                    <Table.ColumnHeader color="gray.700" fontWeight="bold">業務窗口</Table.ColumnHeader>
-                                    <Table.ColumnHeader color="gray.700" fontWeight="bold">客戶電話</Table.ColumnHeader>
-                                    <Table.ColumnHeader color="gray.700" fontWeight="bold">聯絡人</Table.ColumnHeader>
-                                    <Table.ColumnHeader color="gray.700" fontWeight="bold">email</Table.ColumnHeader>
-                                    <Table.ColumnHeader />
-                                </Table.Row>
-                            </Table.Header>
-                            <Table.Body>
-                                { data.map(item => (
-                                    <Table.Row key={item.id} _hover={{ bg: "gray.50" }}>
-                                        <Table.Cell>
-                                            <Flex direction="column">
-                                                <Text fontWeight="bold" fontSize="sm" color="gray.700">{item.name}</Text>
-                                            </Flex>
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            <Flex direction="column">
-                                                <Text fontWeight="bold" fontSize="sm" color="gray.700">{item.taxId}</Text>
-                                            </Flex>
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            <Flex direction="column">
-                                                <Text fontWeight="bold" fontSize="sm" color="gray.700">{item.owner}</Text>
-                                            </Flex>
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            <Flex direction="column">
-                                                <Text fontWeight="bold" fontSize="sm" color="gray.700">{item.phone}</Text>
-                                            </Flex>
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            <Flex direction="column">
-                                                <Text fontWeight="bold" fontSize="sm" color="gray.700">{item.contact}</Text>
-                                            </Flex>
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            <Flex direction="column">
-                                                <Text fontWeight="bold" fontSize="sm" color="gray.700">{item.email}</Text>
-                                            </Flex>
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            <Button size='xs' variant='surface' colorPalette='blue' style={{ borderRadius: '20px'}} mr={2}>
-                                                <FaSearch />
-                                            </Button>
-                                            <Button size='xs' variant='surface' colorPalette='green' style={{ borderRadius: '20px'}} mr={2}>
-                                                <FaEdit />
-                                            </Button>
-                                            <Button size='xs' variant='surface' colorPalette='red' style={{ borderRadius: '20px'}} mr={2}>
-                                                <FaTrash />
-                                            </Button>
-                                        </Table.Cell>
-                                    </Table.Row>
-                                )) }
-                            </Table.Body>
-                        </Table.Root>
+                        <CustomTable columns={columns} data={data} />
                     </Card.Body>
                 </Card.Root>
             </Box>
